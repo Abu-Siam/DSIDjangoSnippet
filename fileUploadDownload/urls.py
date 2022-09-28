@@ -1,7 +1,8 @@
 from django.urls import path
 
-from fileUploadDownload.views import fileUploadDownloadView
+from fileUploadDownload.views import fileUploadDownloadView,fileDownloadView
 
 urlpatterns = [
-    path('file-details/', fileUploadDownloadView.as_view(), name='file-details'),
+    path('file-upload/', fileUploadDownloadView.as_view(), name='file-upload'),
+    path('file-download-view/', fileDownloadView.as_view(), name='file-download-view'),
     ]

@@ -1,55 +1,91 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>FILE UPLOAD DOWNLOAD</title>
+{#    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">#}
+{#    <!-- Font awesome -->#}
+{#    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">#}
+{#    <!-- custom css & js -->#}
+{#    <link rel="stylesheet" href="{% static 'style.css' %}">#}
+{#    <script src="{% static 'main.js' %}" defer></script>#}
+{##}
+{#    <script src="https://rawgit.com/enyo/dropzone/master/dist/dropzone.js"></script>#}
+{#    <link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css">#}
+    <title>FILE UPLOAD</title>
 </head>
 <body>
-<h2>FILE UPLOAD & DOWNLOAD</h2>
-<form action="{% url 'file-details' %}" method="POST" enctype="multipart/form-data">
-   {% csrf_token %}
-   {{ form.as_p }}
-    <button type="submit" name="submit">UPLOAD</button>
-</form>
+<h2>FILE UPLOAD </h2>
+<div style="margin-bottom: 20px">
 
-{# <form action="" method="POST" enctype="multipart/form-data">#}
-{#                #}
-{#        <p class="form-group">#}
-{#            <div class="row">#}
-{#                <div class="col"><input type="text" class="form-control" name="filename" placeholder="File name" required="required"></div>#}
-{#            </div>#}
-{#        </p>#}
-{##}
-{##}
-{#         <p class="form-group">#}
-{#            <div class="row">#}
-{#                <div class="col"><input type="text" class="form-control" name="owner" placeholder="File Owner" required="required"></div>#}
-{#            </div>#}
-{#        </p>#}
-{##}
-{##}
-{##}
-{#         <p class="form-group">#}
-{#            <div class="row">#}
-{##}
-{#              <div class="col"><label>Choose PDF FIle</label>#}
-{#                    <input type="file" id="myFile" name="pdf" placeholder="Report Attachment" enctype="multipart/form-data"></div>#}
-{#            </div>#}
-{#        </p>#}
-{##}
-{##}
-{#         <p class="form-group">#}
-{#            <div class="row">#}
-{##}
-{#              <div class="col"><label>Choose Cover Image</label>#}
-{#                    <input type="file" id="myFile" name="cover" placeholder="Report Attachment" enctype="multipart/form-data"></div>#}
-{#            </div>#}
-{#        </p>#}
-{##}
-{##}
-{#        <p class="form-group">#}
-{#            <button type="submit" class="btn btn-success btn-lg btn-block" href="">Add Now</button>#}
-{#        </p>#}
-{#    </form>#}
+
+    <a  class="btn btn-sm btn-success" href="{% url 'file-download-view' %}" style="padding: 8px; float: left; background-color: green; color: white; margin-bottom: 20px">All Files</a>
+
+</div>
+{#<div style="margin-top: 80px">#}
+{#    <form action="{% url 'file-upload' %}" method="POST" enctype="multipart/form-data">#}
+{#   {% csrf_token %}#}
+{#   {{ form.as_p }}#}
+{#    <button type="submit" name="submit">UPLOAD</button>#}
+{#</form>#}
+{#</div>#}
+
+<div>
+
+    <br>
+{#<form enctype='multipart/form-data' action="" method='POST' class="dropzone dz" id="my-dropzone" >#}
+{#    {% csrf_token %}#}
+{#    <div class="fallback dropzone dz" id="my-dropzone">#}
+{#      <input name="file" type="file" multiple/>#}
+{#    </div>#}
+{#</form>#}
+</div>
+<div style="margin-top: 80px">
+ <form action="{% url 'file-upload' %}" method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+        <p class="form-group">
+            <div class="row">
+                <div class="col"><input type="text" class="form-control" name="filename" placeholder="File name" required="required"></div>
+            </div>
+        </p>
+
+
+         <p class="form-group">
+            <div class="row">
+                <div class="col"><input type="text" class="form-control" name="owner" placeholder="File Owner" required="required"></div>
+            </div>
+        </p>
+
+
+
+         <p class="form-group">
+            <div class="row">
+
+{# <div class="fallback dropzone" id="my-dropzone">#}
+{#      <input type="file" name="pdf" id="myFile"  multiple enctype="multipart/form-data"/>#}
+{#    </div>#}
+{# </div>#}
+
+              <div class="col"><label>Choose PDF FIle</label>
+                    <input type="file" id="myFile" name="pdf" placeholder="Report Attachment" enctype="multipart/form-data"></div>
+            </div>
+        </p>
+
+
+         <p class="form-group">
+            <div class="row">
+
+              <div class="col"><label>Choose Cover Image</label>
+                    <input type="file" id="myFile" name="cover" placeholder="Report Attachment" enctype="multipart/form-data"></div>
+            </div>
+        </p>
+
+
+        <p class="form-group">
+            <button type="submit" class="btn btn-success btn-lg btn-block" href="">Add Now</button>
+        </p>
+    </form>
+</div>
 </body>
 </html>

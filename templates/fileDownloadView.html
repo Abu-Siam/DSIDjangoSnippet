@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+      <!-- Bootstrap CSS -->
+
+
+    <title>FILE DOWNLOAD & VIEW</title>
+</head>
+<style>
+    table,th,td{
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    td{
+        text-align: center;
+    }
+</style>
+<body>
+<h2>FILE DOWNLOAD & VIEW</h2>
+<div>
+        <div style="margin-bottom: 20px">
+
+
+                    <a  class="btn btn-sm btn-success" href="{% url 'file-upload' %}" style="padding: 8px; float: left; background-color: green; color: white; margin-bottom: 20px">Upload</a>
+
+            </div>
+
+         <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="dataTable" style="border:1px solid black" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Cover</th>
+                                <th>File Name</th>
+                                <th>Owner</th>
+                                <th>View</th>
+                                <th>Download</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+{#                            <tr>#}
+{#                                <td>1</td>#}
+{#                                <td>as</td>#}
+{#                                <td>siam</td>#}
+{#                                <td>asdasd</td>#}
+{#                                <td>asdasd</td>#}
+{#                                <td>asdasd</td>#}
+{#                            </tr>#}
+
+
+
+
+                            	<!-- if and for loop -->
+                            	{% if files %}
+                            	  {% for file in files %}
+
+
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+
+                                    <td>
+                                    {% if file.cover %}
+                                    <img src="{{ file.cover }}" alt="{{ file.name }}" style="width:100px; height: 100px">
+                                    {% else %}
+                                    <span class="text-muted">No cover</span>
+                                    {% endif %}
+                                   </td>
+
+                                   <!-- filename and owner -->
+                                    <td>{{ file.name }}</td>
+                                    <td>{{ file.owner }}</td>
+                                     <td>
+
+                                    {% if file.pdf %}
+                                      <a href="{{ file.pdf }}" class="btn btn-outline-primary" target="_blank">
+                                    View PDF</a>
+                                    {% else %}
+                                    <span class="text-muted">No PDF</span>
+                                    {% endif %}
+                                  </td>
+
+                                  <td>
+                                    {% if file.pdf %}
+                                      <a href="{{ file.pdf }}" download class="btn btn-outline-success">
+                                    Download PDF</a>
+                                    {% else %}
+                                    <span class="text-muted">No PDF</span>
+                                    {% endif %}
+                                  </td>
+                                </tr>
+
+                                <!-- end for and if -->
+                                {% endfor %}
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+         </div>
+
+
+
+</div>
+
+</body>
+</html>
