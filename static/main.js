@@ -1,22 +1,42 @@
-Dropzone.autoDiscover=false;
-$(document).ready(function () {
-    const myDropzone = new Dropzone('#my-dropzone', {
-        autoProcessQueue: false,
-        url: 'upload/',
-        maxFiles: 1,
-        maxFilesize: 2,
-        acceptedFiles: '.pdf',
-        clickable:true,
-        disablePreviews:false,
+var Drop = Dropzone.options.DidDropzone = {
 
-    })
+    autoProcessQueue: false, //stops from uploading files until user submits form
+    paramName: "pdf", // The name that will be used to transfer the file
+    maxFilesize: 0.5, // Maximum size of file that you will allow (MB)
+    clickable: true, // This allows the dropzone to select images onclick
+    acceptedFiles: '.pdf', //accepted file types
+    maxFiles: 1, //Maximum number of files/images in dropzone
+    parallelUploads: 10,
+    maxfilesexceeded : function (files) {
+            this.removeAllFiles();
+            this.addFile(files);
+     },
 
 
+    init: function(){
 
-    $("#uploadButton").click(function (e) {
-    console.log("clicked");
-    // e.preventDefault();
+        var submitButton = document.querySelector("#image-btn")
+        var url = $('#DidDropzone').attr("action")
+        myDropzone = this;
 
-    myDropzone.processQueue();
-});
-})
+        //process the queued images on click
+        submitButton.addEventListener("click", function() {
+            myDropzone.processQueue(); 
+        });
+
+        //fire the images to url
+        myDropzone.on("processing", function(file) {
+          myDropzone.options.url = url;
+        });
+
+        //clear the dropzone when complete
+        myDropzone.on("complete", function(file) {
+            myDropzone.removeFile(file);
+        });
+    },
+    success: function(file, json){
+
+        // alert("Perfect! Now visit your gallery...")      
+        
+    },
+}
