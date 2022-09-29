@@ -1,3 +1,5 @@
+import os
+
 from django.db import models
 
 # Create your models here.
@@ -11,3 +13,8 @@ class FileDetailsModel(models.Model):
 
     def __str__(self):
         return self.name
+
+class FileTempStorage(models.Model):
+    pdf = models.FileField(upload_to='storage/temp/')
+    def __str__(self):
+        return os.path.basename(self.pdf.name)
