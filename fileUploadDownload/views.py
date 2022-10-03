@@ -3,7 +3,7 @@ from json import loads, dumps
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework.status import HTTP_200_OK
+from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 from rest_framework.views import APIView
 from fileUploadDownload.forms import FileDetailsForm
 from fileUploadDownload.serializers import FileDetailsSetializer, FileTempStorageSerializer
@@ -79,7 +79,8 @@ class fileUploadTempStorageView(APIView):
         data = {}
         data['pdf'] = request.FILES['file']
         serializer = FileTempStorageSerializer(data=data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        print('ok')
-        return Response({'msg':'this is home'},status=HTTP_200_OK)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            print('ok')
+            return Response({'msg':'this is home'},status=HTTP_200_OK)
+        else: return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)

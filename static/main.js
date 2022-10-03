@@ -1,6 +1,7 @@
 var Drop = Dropzone.options.DidDropzone = {
+            url: 'upload/',
 
-    autoProcessQueue: false, //stops from uploading files until user submits form
+    autoProcessQueue: true, //stops from uploading files until user submits form
     paramName: "pdf", // The name that will be used to transfer the file
     maxFilesize: 0.5, // Maximum size of file that you will allow (MB)
     clickable: true, // This allows the dropzone to select images onclick
@@ -21,7 +22,7 @@ var Drop = Dropzone.options.DidDropzone = {
 
         //process the queued images on click
         submitButton.addEventListener("click", function() {
-            myDropzone.processQueue(); 
+            myDropzone.processQueue();
         });
 
         //fire the images to url
@@ -36,7 +37,30 @@ var Drop = Dropzone.options.DidDropzone = {
     },
     success: function(file, json){
 
-        // alert("Perfect! Now visit your gallery...")      
-        
+        // alert("Perfect! Now visit your gallery...")
+
     },
 }
+
+// Dropzone.autoDiscover=false;
+// $(document).ready(function () {
+//     const myDropzone = new Dropzone('#DidDropzone', {
+//         autoProcessQueue: true,
+//         url: 'upload/',
+//         maxFiles: 1,
+//         maxFilesize: 2,
+//         acceptedFiles: '.pdf',
+//         clickable:true,
+//         disablePreviews:false,
+//
+//     })
+//
+//
+//
+//     $("#uploadButton").click(function (e) {
+//     console.log("clicked");
+//     // e.preventDefault();
+//
+//     myDropzone.processQueue();
+// });
+// })
