@@ -17,10 +17,22 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework.authtoken.views import obtain_auth_token
+from rest_framework.routers import DefaultRouter
+from basicAuth.auth import CustomAuthToken
 
+from basicAuth.views import StudentViewSet
+
+router = DefaultRouter()
+
+router.register('studentapi', StudentViewSet, basename='studentapi')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('fileUploadDownload.urls')),
+    path('',include(router.urls)),
+    path('api-auth/', include('rest_framework.urls')),
+    path('gettoken/',obtain_auth_token),
+    path('gettoken2/',CustomAuthToken.as_view()),
 ]
 
 if settings.DEBUG:
