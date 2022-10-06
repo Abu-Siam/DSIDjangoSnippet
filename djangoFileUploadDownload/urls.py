@@ -26,6 +26,8 @@ from basicAuth.views import StudentViewSet
 router = DefaultRouter()
 
 router.register('studentapi', StudentViewSet, basename='studentapi')
+# router.register('student-detail', StudentViewSet, basename='studentDetail')
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('fileUploadDownload.urls')),
@@ -33,6 +35,7 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('gettoken/',obtain_auth_token),
     path('gettoken2/',CustomAuthToken.as_view()),
+    path('student-detail/<int:pk>', StudentViewSet.as_view({'get': 'list'}), name='student-detail'),
 ]
 
 if settings.DEBUG:

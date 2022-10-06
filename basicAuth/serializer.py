@@ -9,3 +9,13 @@ class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
         fields = ['id','name','roll','city','name_city']
+class StudentHyperlinkedSerializer(serializers.HyperlinkedModelSerializer):
+    url = serializers.HyperlinkedIdentityField(view_name='student-detail')
+
+    # name_city = serializers.ReadOnlyField('name_city')
+    name_city = serializers.SerializerMethodField('get_name_city')
+    def get_name_city(self,obj):
+        return obj.name + ' ' + obj.city
+    class Meta:
+        model = Student
+        fields = ['id','url','name','roll','city','name_city']
