@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django_filters',
     'fileUploadDownload',
     'basicAuth',
+    'nestedCrud',
     'rest_framework.authtoken',
 ]
 

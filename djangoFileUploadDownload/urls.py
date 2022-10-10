@@ -22,10 +22,13 @@ from rest_framework.routers import DefaultRouter
 from basicAuth.auth import CustomAuthToken
 
 from basicAuth.views import StudentViewSet
+from nestedCrud.views import SongViewSet, SingerViewSet
 
 router = DefaultRouter()
 
 router.register('studentapi', StudentViewSet, basename='studentapi')
+router.register('songapi', SongViewSet, basename='songapi')
+router.register('singerapi', SingerViewSet, basename='singerapi')
 # router.register('student-detail', StudentViewSet, basename='studentDetail')
 
 urlpatterns = [
@@ -36,6 +39,8 @@ urlpatterns = [
     path('gettoken/',obtain_auth_token),
     path('gettoken2/',CustomAuthToken.as_view()),
     path('student-detail/<int:pk>', StudentViewSet.as_view({'get': 'list'}), name='student-detail'),
+    path('song-detail/<int:pk>', SongViewSet.as_view({'get': 'list'}), name='song-detail'),
+    path('singer-detail/<int:pk>', SingerViewSet.as_view({'get': 'list'}), name='singer-detail'),
 ]
 
 if settings.DEBUG:
