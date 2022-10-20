@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'basicAuth',
     'nestedCrud',
     'rest_framework.authtoken',
+    'adminStackedInline',
 ]
 
 MIDDLEWARE = [
