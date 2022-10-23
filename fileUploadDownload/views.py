@@ -1,5 +1,6 @@
 from json import loads, dumps
 
+from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
@@ -16,6 +17,7 @@ from django.template import RequestContext
 class fileUploadDownloadView(APIView):
     def get(self, request):
         fm= FileDetailsForm()
+        # user = User.objects.cre
         return render(request, 'fileUploadDownload.html', {'form':fm})
 
     # def post(self, request):
